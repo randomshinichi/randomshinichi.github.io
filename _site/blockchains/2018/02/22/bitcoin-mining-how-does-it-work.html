@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Bitcoin mining - how does it work? | The Chiwbaka</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Bitcoin mining - how does it work?" />
+<meta name="author" content="admin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Economics Behind Mining To understand how mining really works, let’s first understand the economics behind it." />
+<meta property="og:description" content="Economics Behind Mining To understand how mining really works, let’s first understand the economics behind it." />
+<link rel="canonical" href="http://localhost:4000/blockchains/2018/02/22/bitcoin-mining-how-does-it-work.html" />
+<meta property="og:url" content="http://localhost:4000/blockchains/2018/02/22/bitcoin-mining-how-does-it-work.html" />
+<meta property="og:site_name" content="The Chiwbaka" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-02-22T00:00:00+01:00" />
+<script type="application/ld+json">
+{"headline":"Bitcoin mining - how does it work?","dateModified":"2018-02-22T00:00:00+01:00","datePublished":"2018-02-22T00:00:00+01:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blockchains/2018/02/22/bitcoin-mining-how-does-it-work.html"},"author":{"@type":"Person","name":"admin"},"description":"Economics Behind Mining To understand how mining really works, let’s first understand the economics behind it.","@type":"BlogPosting","url":"http://localhost:4000/blockchains/2018/02/22/bitcoin-mining-how-does-it-work.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Chiwbaka" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">The Chiwbaka</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/contact.html">Contact</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Bitcoin mining - how does it work?</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-02-22T00:00:00+01:00" itemprop="datePublished">
+        
+        Feb 22, 2018
+      </time>
+      
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">admin</span></span>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="economics-behind-mining">Economics Behind Mining</h1>
+<p>To understand how mining really works, let’s first understand the economics behind it.</p>
+
+<p>The network of computers running the coin software (let’s say Bitcoin) wants history (of transactions) to be recorded in the form of blocks, and it rewards those who do so with 12.5 BTC.</p>
+
+<p>Bitcoin wants history to be recorded in a new block every 10 minutes. Additionally, since anybody could record history in a new block, it has to make sure that those who invested the most (electricity, stake, capacity etc) have a better chance of recording a new block, because those who invested the most are probably more interested in seeing Bitcoin work properly, as opposed to those who are trying to spend their Bitcoin twice.</p>
+
+<p>Since recording a new block has a reward associated with it, and a new block mustn’t appear too often, and those who write history may have nefarious intents, there is a need to make recording a new block artificially difficult. This is mining/Proof of Work.</p>
+
+<h1 id="mining-and-the-nonce">Mining and the Nonce</h1>
+<p>A Bitcoin block contains:</p>
+<ul>
+  <li>The size of the block (so the computer knows when is the start and end)</li>
+  <li>The block header
+    <ul>
+      <li>block version</li>
+      <li>previous block hash</li>
+      <li>Merkle Root</li>
+      <li>Timestamp</li>
+      <li>Difficulty</li>
+      <li>Nonce</li>
+    </ul>
+  </li>
+  <li>Transaction count</li>
+  <li>Transaction list</li>
+</ul>
+
+<p>Difficulty vs target: The target could be a huuuuge number, which the hash of the block has to be less than. Expressing such a huge number everywhere would be inefficient. Therefore, it’s usually better to express the target as a difficulty, from which the target can be calculated. The larger the difficulty, the smaller the target, and therefore the harder it is to find a hash which is lower than the target.</p>
+
+<p>Every coin has a different target-difficulty equation.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CryptoNote/Monero is 2^256-1/target = difficulty.
+Ethereum: 2^256 / target = difficulty
+Bitcoin: target = coefficient * 2^(8*(exponent-3)), where target is the first two hexadecimal digits of the difficulty and exponent is the rest.
+</code></pre></div></div>
+
+<p>The Bitcoin network makes finding a new block hard by saying “find me a block whose fingerprint (a number, but expressed in hexadecimal) is less than this number (the target)”. Only the blockheader is used to compute the block’s hash. It changes the target to make it just hard enough so that on average, a new block should be found every 10 minutes.</p>
+
+<p>The point of all hash functions (in this case SHA256) is that they are properly random, such that if a single bit is different, this makes the hash totally different. Thus, you can only use trial and error to find a solution, and what you can change is the nonce in the blockheader. So you just start hashing the blockheader with different numbers for the nonce and hope that one of them meets the target. This is mining.</p>
+
+<p>Over time, Bitcoin’s difficulty has grown so much that you could roll all possible values of the nonce and still not get a hash that meets the target. They started rolling timestamps then but you can only change the timestamp so much. Hence the extranonce, which is embedded in the coinbase transaction of each block.</p>
+
+<h1 id="mining-pools">Mining Pools</h1>
+<p>The mining pool is a separate software like a web CMS application. In fact, it usually comes with a web frontend so miners can login, check their stats and initiate payouts. It also needs a database so that the pool can keep track of miners’ balances.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node ------ pool ---- miner
+                |---- miner
+                |---- miner
+                |---- miner
+                |----- website frontend
+</code></pre></div></div>
+
+<p>The pool polls the node every second or so to check for new blocks or network stats, and maintains a bidirectional TCP connection with the miner (mostly stratum). When the node tells the pool about a new block, the poll pushes out the new block to the miners. When a miner finds a nonce that worked, it sends the nonce to the pool.</p>
+
+<p>Stratum is an important part of how a miner and a pool communicate. Imagine doing pool-miner communication over HTTP. HTTP was designed for applications where if a client wants something, it asks the server, the server communicates, and the TCP channel is closed afterwards. The server cannot initiate the communication, and the TCP channel has to be recreated each time communication is needed. This costs time.</p>
+
+<p>With Stratum, a miner connects to a pool with a TCP connection, and they talk JSON over it. Stratum is more of a way of doing things, and not a standard/specification, so the JSON messages can be different for each coin/miner.</p>
+
+<h1 id="mining-pools-and-different-difficulties">Mining Pools and different Difficulties</h1>
+<p>You might have noticed that the difficulty the pool gives you is not the difficulty that the coin’s network is at. In fact it’s way lower. What’s up with that?</p>
+
+<p>If you give a single miner the network’s difficulty, he’d take such a long time to find a nonce that satisfies the difficulty that you might not hear from him at all. And when he does finally contact the pool, how does the pool know that he’s been doing work the entire time?</p>
+
+<p>Thus the pool gives the miner a lower difficulty, just enough so that the miner only contacts the pool perhaps 3 times a minute. If the difficulty is too low for the miner, it’ll find nonces and message the pool too often which would be like a DDoS. So the pool varies the difficulty depending on the miner’s performance.</p>
+
+<p>OK, but it you set a miner on lower difficulty, how is it ever going to find a nonce that meets the network’s difficulty?</p>
+
+<p>Remember the larger the difficulty, the smaller the target. Thus:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|         |                                 |
+network's          miner's target
+target
+</code></pre></div></div>
+
+<p>If you randomly try nonces and it meets the miner’s target, there’s still a smaller chance that it happens to meet the network’s target too right? It’s like throwing darts, except you must imagine you can’t learn how to aim a dart. Over time, you’d be bound to hit the network’s target too.</p>
+
+<p>If the miner finds a nonce that satisfies the lower difficulty that the pool assigned it, it sends it to the pool. The pool checks if the nonce also satisfies the network’s difficulty. If not, it records “miner xxxx put some work in and tried, award him some Bitcoin next time we actually do find a block”. This is the so-called share. If a share meets the network difficulty, it wouldn’t be a share. It would be a block.</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/blockchains/2018/02/22/bitcoin-mining-how-does-it-work.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Chiwbaka</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              The Chiwbaka
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:andrew.work0@gmail.com">andrew.work0@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+  <li><a href="https://www.twitter.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developer and crypto enthusiast.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

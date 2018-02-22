@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>The Concept of State in Blockchains | The Chiwbaka</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="The Concept of State in Blockchains" />
+<meta name="author" content="admin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="While working on the code that makes up an actual cryptocoin, I’d always come across a class or something that would refer to a ‘State’. And I never really knew what that was." />
+<meta property="og:description" content="While working on the code that makes up an actual cryptocoin, I’d always come across a class or something that would refer to a ‘State’. And I never really knew what that was." />
+<link rel="canonical" href="http://localhost:4000/blockchains/2017/09/29/concept-state-blockchains.html" />
+<meta property="og:url" content="http://localhost:4000/blockchains/2017/09/29/concept-state-blockchains.html" />
+<meta property="og:site_name" content="The Chiwbaka" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-29T23:21:15+02:00" />
+<script type="application/ld+json">
+{"headline":"The Concept of State in Blockchains","dateModified":"2017-09-29T23:21:15+02:00","datePublished":"2017-09-29T23:21:15+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blockchains/2017/09/29/concept-state-blockchains.html"},"author":{"@type":"Person","name":"admin"},"description":"While working on the code that makes up an actual cryptocoin, I’d always come across a class or something that would refer to a ‘State’. And I never really knew what that was.","@type":"BlogPosting","url":"http://localhost:4000/blockchains/2017/09/29/concept-state-blockchains.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Chiwbaka" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">The Chiwbaka</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/contact.html">Contact</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The Concept of State in Blockchains</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-29T23:21:15+02:00" itemprop="datePublished">
+        
+        Sep 29, 2017
+      </time>
+      
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">admin</span></span>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>While working on the code that makes up an actual cryptocoin, I’d always come across a class or something that would refer to a ‘State’. And I never really knew what that was.</p>
+
+<p>Was that the state of the coin’s network, on the latest block?
+The state of that node perhaps - but how could the node have a valid state when it’s still busy downloading the blockchain?</p>
+
+<p>It wasn’t until I read Ethereum’s whitepaper that the concept of state was formalized: it’s the state of the coin as your node sees it, with the blockchain data it has on your computer.</p>
+
+<p>Should your node not have the latest blocks, well then your node’s state is out of date, and it needs to download more blocks and recalculate the new state from that.</p>
+
+<p>Bitcoin’s state is very simple. It is simply which addresses have how many coins, or the Unspent Transaction Outputs (UTXOs). The blocks don’t have any information about the state; the Bitcoin client must calculate its own state based on the private keys it has in its wallet, and from what it has downloaded of the blockchain.</p>
+
+<p>Ethereum blocks include the state in them, in that each block header holds a hash of the state tree’s root, as well as hashes of the transaction and storage trees’ roots (you wouldn’t want blocks to always have a full copy of the state. That would be a waste of space. So you store them in a tree structure, where the branches can point to data (leaves) in older blocks).
+What’s in an Ethereum state?</p>
+<ol>
+  <li>The account’s nonce (each time you send a transaction from this account, the nonce increases by 1. This is to prevent double spending)</li>
+  <li>The account’s balance</li>
+  <li>storageRoot (data and Solidity programs go in here)</li>
+  <li>codeHash (what is this?)</li>
+</ol>
+
+<p>Remember when you had to download that huge Bitcoin blockchain and wait for it to be synced up to the latest block just to know how much Bitcoin you have? In Ethereum, because the state is always stored with the block in this manner, you can just get the latest block, traverse the state tree (which points you to other blocks in the history that are relevant to your account) and you can get your balance much faster.</p>
+
+<p>It seems many people like the idea of storing the state in blocks, since QRL also stores the state. The State in QRL consists of (for each account):</p>
+<ol>
+  <li>The account’s nonce (this is everywhere. I wonder if Bitcoin accounts also have this)</li>
+  <li>The account’s balance</li>
+  <li>a list of public keys that this account used before, to prevent them from being used again (One Time Signatures are what protects us from quantum computers)</li>
+  <li>a list of staking accounts (this is a PoS coin)</li>
+</ol>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/blockchains/2017/09/29/concept-state-blockchains.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Chiwbaka</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              The Chiwbaka
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:andrew.work0@gmail.com">andrew.work0@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+  <li><a href="https://www.twitter.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developer and crypto enthusiast.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

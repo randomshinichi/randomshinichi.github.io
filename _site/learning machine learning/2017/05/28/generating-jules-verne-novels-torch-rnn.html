@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Generating Jules Verne novels with Torch-RNN | The Chiwbaka</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Generating Jules Verne novels with Torch-RNN" />
+<meta name="author" content="admin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Torch-RNN is a rewrite of Andrej Karpathy’s char-rnn. You train it on some text, and then it can generate ‘similar’ text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?" />
+<meta property="og:description" content="Torch-RNN is a rewrite of Andrej Karpathy’s char-rnn. You train it on some text, and then it can generate ‘similar’ text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?" />
+<link rel="canonical" href="http://localhost:4000/learning%20machine%20learning/2017/05/28/generating-jules-verne-novels-torch-rnn.html" />
+<meta property="og:url" content="http://localhost:4000/learning%20machine%20learning/2017/05/28/generating-jules-verne-novels-torch-rnn.html" />
+<meta property="og:site_name" content="The Chiwbaka" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-05-28T13:03:39+02:00" />
+<script type="application/ld+json">
+{"headline":"Generating Jules Verne novels with Torch-RNN","dateModified":"2017-05-28T13:03:39+02:00","datePublished":"2017-05-28T13:03:39+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/learning%20machine%20learning/2017/05/28/generating-jules-verne-novels-torch-rnn.html"},"author":{"@type":"Person","name":"admin"},"description":"Torch-RNN is a rewrite of Andrej Karpathy’s char-rnn. You train it on some text, and then it can generate ‘similar’ text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?","@type":"BlogPosting","url":"http://localhost:4000/learning%20machine%20learning/2017/05/28/generating-jules-verne-novels-torch-rnn.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Chiwbaka" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">The Chiwbaka</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/contact.html">Contact</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Generating Jules Verne novels with Torch-RNN</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-05-28T13:03:39+02:00" itemprop="datePublished">
+        
+        May 28, 2017
+      </time>
+      
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">admin</span></span>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Torch-RNN is a rewrite of Andrej Karpathy’s char-rnn. You train it on some text, and then it can generate ‘similar’ text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?</p>
+
+<p>The hardest part was setting the environment up.</p>
+
+<p>The text preprocessor was written in Python 2, and you’d think “hey it’s just wrangling some text what requirements does it need”. And it pulled in Cython, which numpy requires. Compiling Cython is always a bitch. I hate wading through compile scripts that I didn’t write myself that break.</p>
+
+<p>The NN model itself is written in Lua and needs something called LuaJIT, which sounds like a faster variant of a Lua interpreter. Whatever, not interested in learning the language. Setting that up required a lot of compiling too.</p>
+
+<p>In the end I managed to get everything setup, and realized that I couldn’t run the neural network on my GPU because everybody only writes for CUDA (thanks guys) and I have a Radeon HD 6870 (note: OpenCL won’t work out of the box with the Radeon Crimson 16.x beta drivers, the last ones to be released for Barts. You need Catalyst 15.7.1 WHQL for proper OpenCL 1.2 support).</p>
+
+<p>Anyway. I took From the Earth to the Moon, Eight Hundred Leagues on the Amazon (I wanna read that!), and. The Secret of the Island (I just found out that this was written by someone else, and only translated by Verne!) and put them all in one huge  text file.</p>
+
+<p>Training the neural network took all of my CPU. Since I was running in the Bash shell for Windows 10 there was no way I could’ve gotten it to run on the GPU anyway.</p>
+
+<p>After a day or two of training (and about 20K iterations) the virtual Jules Verne spat this out:</p>
+
+<blockquote>&amp; thon tole, by seemed profufess and metal stations requirements of Judge Ribeiro, which degrees.
+They have been descended some caber.
+
+“Imlet in “the struggled a pressure, we must attracted by Recthman. That is more principants of the amazing,
+nothing the course were so
+craw of the same peculiable perpetibilitions of the
+life of Judge Jarriquez frave to given
+arrive
+to violence.  On the forests, with the _Tapperto_”_
+
+The companion, and
+it like a close stretter had the traveler considerable than to the earth where the
+quality.
+
+On thick the Gun Club; what they disarsed of the idea of twenty-keeping them.  But to this day as to me, fix _“jussiba!”
+
+“Aboats of do.
+During the darkment is recovertaken a despaited that public Street!"
+
+The long poblen the: dembnoit at langual paralle _ther of the Amazon?"
+
+"What a compressed to Project Gutenberg-textected to this apparent for hourbascure
+was no doubt, when he was with in its finished, “there would return
+with all, or rather journey.
+
+The step of the document seen to ask supering and have been liness; it would true. Not
+the diamobas writable intomarier of
+great a previous; after less mean them.
+
+And which simple with more than the villal
+work of the projectile would have indeed the
+topped
+the moon?
+Work of the pounds
+to proceed, at
+them in at over Joam Dacosta dadled for
+the refund of Sateltences comply up the certain soon in the right of nigmon.
+The
+Sound the projectile, and without retrew of the best
+conquernts misceldt.
+
+He as reply, the loud, the two gran!  Unifer--“it is inches that the mass approach
+it, and we branches--that I cabinged that a
+comes ank, low.
+They reprisonation of the metal plantant mashed
+which his destity proper profession of a large feeting his none-wall of the gas, free cupiness, through
+frittle for the
+jokes Donselver, putting scars of carrying an edgars a fear one of the
+Rodroats
+as soverlocks at the Chaboy, you, she not have the syriy the coupo</blockquote>
+
+<p>Clearly it seems I should’ve just removed the Project Gutenberg prefaces from the training text.</p>
+
+<p>Anyway it’s doing kinda well for a neural network that doesn’t understand English, and besides, doesn’t even understand the concepts behind the words.</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/learning%20machine%20learning/2017/05/28/generating-jules-verne-novels-torch-rnn.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Chiwbaka</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              The Chiwbaka
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:andrew.work0@gmail.com">andrew.work0@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+  <li><a href="https://www.twitter.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developer and crypto enthusiast.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

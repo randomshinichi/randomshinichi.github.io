@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Wordpress on Low Memory Servers | The Chiwbaka</title>
+<meta name="generator" content="Jekyll v3.7.2" />
+<meta property="og:title" content="Wordpress on Low Memory Servers" />
+<meta name="author" content="admin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This site runs on a 512MB DigitalOcean droplet.  Every week or two the Linux kernel would kill MySQL for using too much RAM… and restarting it got tiring." />
+<meta property="og:description" content="This site runs on a 512MB DigitalOcean droplet.  Every week or two the Linux kernel would kill MySQL for using too much RAM… and restarting it got tiring." />
+<link rel="canonical" href="http://localhost:4000/2017/04/05/wordpress-low-memory-servers.html" />
+<meta property="og:url" content="http://localhost:4000/2017/04/05/wordpress-low-memory-servers.html" />
+<meta property="og:site_name" content="The Chiwbaka" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-04-05T16:57:05+02:00" />
+<script type="application/ld+json">
+{"headline":"Wordpress on Low Memory Servers","dateModified":"2017-04-05T16:57:05+02:00","datePublished":"2017-04-05T16:57:05+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/04/05/wordpress-low-memory-servers.html"},"author":{"@type":"Person","name":"admin"},"description":"This site runs on a 512MB DigitalOcean droplet.  Every week or two the Linux kernel would kill MySQL for using too much RAM… and restarting it got tiring.","@type":"BlogPosting","url":"http://localhost:4000/2017/04/05/wordpress-low-memory-servers.html","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="The Chiwbaka" />
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" rel="author" href="/">The Chiwbaka</a>
+
+    
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          
+            
+            
+          
+            
+            
+            <a class="page-link" href="/contact.html">Contact</a>
+            
+          
+            
+            
+          
+            
+            
+          
+            
+            
+          
+        </div>
+      </nav>
+    
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Wordpress on Low Memory Servers</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-04-05T16:57:05+02:00" itemprop="datePublished">
+        
+        Apr 5, 2017
+      </time>
+      
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">admin</span></span>
+      </p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This site runs on a 512MB DigitalOcean droplet.  Every week or two the Linux kernel would kill MySQL for using too much RAM… and restarting it got tiring.</p>
+
+<p>[caption id=”attachment_94” align=”alignnone” width=”525”]<a href="http://chiwbaka.com/wp-content/uploads/2017/04/after.png"><img src="http://chiwbaka.com/wp-content/uploads/2017/04/after-1024x766.png" alt="" /></a> After the tweaks[/caption]</p>
+
+<p>When I first start nginx, php-fpm and MySQL, the memory usage starts at 370MB and only goes upwards from there. htop (and journalctl) tells me that MySQL is the biggest offender, so let’s start there.</p>
+
+<h2 id="mysql">MySQL</h2>
+
+<p>After some googling one parameter always popped up in every guide: innodb_buffer_pool_size. <a href="https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">MySQL docs</a> state that it’s 128MB by default. So I reduced it to 8MB to see what would happen. After all, I doubt the entirety of my posts on this site+Wordpress settings could ever reach 8MB, and even if it did, it’s backed by an SSD, so who cares.</p>
+
+<p>It made a huge difference. MySQL went from using 18% of my RAM (~92MB) to just 8% (43MB).</p>
+
+<h2 id="php">PHP</h2>
+
+<p>Some Googling led to <a href="https://ma.ttias.be/a-better-way-to-run-php-fpm/">A better way to run PHP</a>, which advocates using pm = ondemand instead of pm = dynamic.</p>
+
+<p>Before, php-fpm had 3 child processes taking up 18% of my RAM. Now, it has none, and it just spins them up on demand which makes a lot of sense.</p>
+
+<p>I don’t use php-fpm pools so I ignored that part.</p>
+
+<h2 id="390mb-memory-on-fresh-start---140mb">390MB memory on fresh start -&gt; 140MB!!</h2>
+
+<p>The system now uses ~140MB of RAM and I’m pretty proud of myself - after just two tweaks! Nobody cares about this site right now but if traffic picks up I’ll just enable nginx microcaching.</p>
+
+  </div>
+
+  
+
+  <a class="u-url" href="/2017/04/05/wordpress-low-memory-servers.html" hidden></a>
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">The Chiwbaka</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">
+            
+              The Chiwbaka
+            
+            </li>
+            
+            <li><a class="u-email" href="mailto:andrew.work0@gmail.com">andrew.work0@gmail.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+  
+  
+  
+  <li><a href="https://github.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+  <li><a href="https://www.twitter.com/randomshinichi"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">randomshinichi</span></a></li>
+  
+  
+  
+</ul>
+
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Developer and crypto enthusiast.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
