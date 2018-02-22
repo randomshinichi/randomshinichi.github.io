@@ -1,7 +1,6 @@
 ---
 author: admin
 layout: post
-slug: bitcoin-mining-how-does-it-work
 title: Bitcoin mining - how does it work?
 categories:
 - Blockchains
