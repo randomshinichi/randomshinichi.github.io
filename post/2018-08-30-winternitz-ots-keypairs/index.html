@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Winternitz OTS keypairs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <link href="" rel="alternate" type="application/rss+xml" title="The Chiwbaka" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/hc.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/"><p class="navbar-brand">The Chiwbaka</p></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="about/">About </a></li>
+					
+					<li><a href="">Home </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="/"><h1 class="brand">The Chiwbaka</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="about/">About </a></li>
+					
+						<li><a href="">Home </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           
+           <li> <a href="https://www.linkedin.com/in/achiw/"><i class="fab fa-linkedin"></i> linkedin</a> </li>
+           
+           <li> <a href="http://www.github.com/randomshinichi"><i class="fab fa-github-square"></i> github</a> </li>
+           <li> <a href="mailto:andrew.work0,%20gmail"><i class="fa fa-envelope"></i> email</a> </li>
+           <li> <a href="http://do-it-big.com"><i class="fab fa-wordpress"></i> do-it-big</a> </li>
+
+
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">Winternitz OTS keypairs</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2018-08-30</small></p> <hr/>
+   <div class="post">
+     <p>WOTS is a way of generating a public/private keypair, and using it for signing messages. In other words, it&rsquo;s a signature scheme. Importantly, it only depends on having a good hash function, which makes it &lsquo;quantum resistant&rsquo; because Shor&rsquo;s algorithm can make cracking elliptic curves easier on quantum computers (????). XMSS uses a tweaked version called WOTS+, which improves some cryptographical aspects which I don&rsquo;t quite understand. A lot of what I learnt came from this page at <a href="https://cryptoservices.github.io/quantum/2015/12/04/one-time-signatures.html">Cryptography Services</a>.</p>
+
+<p>Suppose we have a message &lsquo;1234&rsquo;. Let&rsquo;s sign it with WOTS to prove that we created/sent this message.</p>
+
+<ol>
+<li><p>Generate a Secret Key</p>
+
+<p>Since our message is 4 characters long, we need to generate 4 random collections of bits (let&rsquo;s call them words, because calling them bytes would imply they&rsquo;re 8 bits long, which doesn&rsquo;t have to be the case). So let&rsquo;s say these words should be 6 bits long.</p>
+
+<p><code>secretkey = ['011001', '010110', '100001', '001000']</code></p></li>
+
+<li><p>Calculate the Public Key from the Secret Key</p>
+
+<p>There are many hash functions out there, like SHA-1, SHA-2, SHA-3, Whirlpool, and the one everybody knows from Bittorrent, MD5.</p>
+
+<p>The idea is you hash each word in the secretkey /n/ times, so let&rsquo;s say /n=8/.</p>
+
+<p><code>publickey = [sha2(sha2(sha2(sha2...('011001')))), sha2(sha2(sha2(sha2...('010110')))) ... ]</code></p>
+
+<p>It is now quite impossible to calculate the secret key from the public key. It&rsquo;s impossible for 1 iteration of SHA2, let alone 8.</p></li>
+
+<li><p>Signing the message</p>
+
+<pre><code>The signature of '1' is sha2('011001')
+The signature of '2' is sha2(sha2('010110'))
+The signature of '3' is sha2(sha2(sha2('100001')))
+The signature of '4' is sha2(sha2(sha2(sha2('001000'))))
+</code></pre>
+
+<p>Once you release your public key, everyone can see that if you hash sha2(&lsquo;011001&rsquo;) 7 more times, and sha2(sha2(&lsquo;010110&rsquo;)) 6 more times etc., they will have calculated your public key, and thus you have proved that you were the one who actually signed the message &lsquo;1234&rsquo;.</p>
+
+<p>Obviously, don&rsquo;t use this method to sign &lsquo;2345&rsquo;! Or any other message. It&rsquo;s called a OTS because it&rsquo;s a One Time Signature. Generate a new secret key each time you want to sign something.</p></li>
+</ol>
+
+<p>WOTS+</p>
+
+<p>The secret key now includes a random XOR bitmask for each word.</p>
+
+<pre><code>secretkey = [('011001', '111111'), ('010110', '001001'), ('100001', '000000'), ('001000', '101010')]
+</code></pre>
+
+<p>When calculating the public key/signature, after calculating the sha2(word), you XOR the result with the word&rsquo;s secret bitmask. This is supposed to make signature sizes smaller/harder to crack (don&rsquo;t ask me).</p>
+
+   </div>
+ </div>
+
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+     
+      &nbsp;<li class="next"><a href="/post/2018-02-22-bitcoin-mining-how-does-it-work/"> Bitcoin mining - how does it work?</a></li>
+</ul>
+
+
+
+    </ul>
+    </div>
+    <footer>
+
+        <p class="text-muted credit">&copy; 2018. All rights reserved. </p>
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+</body>
+
+</html>
+

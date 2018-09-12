@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blockchains on The Chiwbaka</title>
+    <link>/categories/blockchains/</link>
+    <description>Recent content in Blockchains on The Chiwbaka</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/blockchains/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Winternitz OTS keypairs</title>
+      <link>/post/2018-08-30-winternitz-ots-keypairs/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-08-30-winternitz-ots-keypairs/</guid>
+      <description>WOTS is a way of generating a public/private keypair, and using it for signing messages. In other words, it&amp;rsquo;s a signature scheme. Importantly, it only depends on having a good hash function, which makes it &amp;lsquo;quantum resistant&amp;rsquo; because Shor&amp;rsquo;s algorithm can make cracking elliptic curves easier on quantum computers (????). XMSS uses a tweaked version called WOTS+, which improves some cryptographical aspects which I don&amp;rsquo;t quite understand. A lot of what I learnt came from this page at Cryptography Services.</description>
+    </item>
+    
+    <item>
+      <title>Bitcoin mining - how does it work?</title>
+      <link>/post/2018-02-22-bitcoin-mining-how-does-it-work/</link>
+      <pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-02-22-bitcoin-mining-how-does-it-work/</guid>
+      <description>Economics Behind Mining To understand how mining really works, let&amp;rsquo;s first understand the economics behind it.
+The network of computers running the coin software (let&amp;rsquo;s say Bitcoin) wants history (of transactions) to be recorded in the form of blocks, and it rewards those who do so with 12.5 BTC.
+Bitcoin wants history to be recorded in a new block every 10 minutes. Additionally, since anybody could record history in a new block, it has to make sure that those who invested the most (electricity, stake, capacity etc) have a better chance of recording a new block, because those who invested the most are probably more interested in seeing Bitcoin work properly, as opposed to those who are trying to spend their Bitcoin twice.</description>
+    </item>
+    
+    <item>
+      <title>The Concept of State in Blockchains</title>
+      <link>/post/concept-state-blockchains/</link>
+      <pubDate>Fri, 29 Sep 2017 21:21:15 +0000</pubDate>
+      
+      <guid>/post/concept-state-blockchains/</guid>
+      <description>While working on the code that makes up an actual cryptocoin, I&amp;rsquo;d always come across a class or something that would refer to a &amp;lsquo;State&amp;rsquo;. And I never really knew what that was.
+Was that the state of the coin&amp;rsquo;s network, on the latest block? The state of that node perhaps - but how could the node have a valid state when it&amp;rsquo;s still busy downloading the blockchain?
+It wasn&amp;rsquo;t until I read Ethereum&amp;rsquo;s whitepaper that the concept of state was formalized: it&amp;rsquo;s the state of the coin as your node sees it, with the blockchain data it has on your computer.</description>
+    </item>
+    
+  </channel>
+</rss>

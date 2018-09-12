@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Learning Machine Learning on The Chiwbaka</title>
+    <link>/categories/learning-machine-learning/</link>
+    <description>Recent content in Learning Machine Learning on The Chiwbaka</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 28 May 2017 11:03:39 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/learning-machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Generating Jules Verne novels with Torch-RNN</title>
+      <link>/post/generating-jules-verne-novels-torch-rnn/</link>
+      <pubDate>Sun, 28 May 2017 11:03:39 +0000</pubDate>
+      
+      <guid>/post/generating-jules-verne-novels-torch-rnn/</guid>
+      <description>Torch-RNN is a rewrite of Andrej Karpathy&amp;rsquo;s char-rnn. You train it on some text, and then it can generate &amp;lsquo;similar&amp;rsquo; text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?
+The hardest part was setting the environment up.
+The text preprocessor was written in Python 2, and you&amp;rsquo;d think &amp;ldquo;hey it&amp;rsquo;s just wrangling some text what requirements does it need&amp;rdquo;.</description>
+    </item>
+    
+  </channel>
+</rss>

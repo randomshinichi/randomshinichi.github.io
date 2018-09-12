@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Don&#39;t add Django migrations to version control</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <link href="" rel="alternate" type="application/rss+xml" title="The Chiwbaka" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/hc.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/"><p class="navbar-brand">The Chiwbaka</p></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="about/">About </a></li>
+					
+					<li><a href="">Home </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="/"><h1 class="brand">The Chiwbaka</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="about/">About </a></li>
+					
+						<li><a href="">Home </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           
+           <li> <a href="https://www.linkedin.com/in/achiw/"><i class="fab fa-linkedin"></i> linkedin</a> </li>
+           
+           <li> <a href="http://www.github.com/randomshinichi"><i class="fab fa-github-square"></i> github</a> </li>
+           <li> <a href="mailto:andrew.work0,%20gmail"><i class="fa fa-envelope"></i> email</a> </li>
+           <li> <a href="http://do-it-big.com"><i class="fab fa-wordpress"></i> do-it-big</a> </li>
+
+
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">Don&#39;t add Django migrations to version control</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-03-30</small></p> <hr/>
+   <div class="post">
+     <p>Django docs recommend a lot of things which don&rsquo;t really work out in reality.</p>
+
+<p>For instance, having a single settings.py file. The only reason I can think of having it this way is so as not to overwhelm newcomers, because you need different settings for dev, production and staging.
+A single tests.py for an app. Seriously, guys? You need test_views.py, test_models.py, test_manager.py, at least.</p>
+
+<p>And here&rsquo;s the one thing that might be useful, might not: committing your migrations to version control.</p>
+
+<p>Here&rsquo;s the situation: you&rsquo;re working on the models for a Django app.</p>
+
+<pre><code>class Dog(models.Model):
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    age = models.IntegerField()
+</code></pre>
+
+<p>Hmm, perhaps age should be date-of-birth. After all, you don&rsquo;t want to have to write some script to be updating the age value for every dog every year. No, perhaps it should be named dob after all.</p>
+
+<p>So you make the change in models.py and add the migrations for the changes as well, they get saved as 0002_renamed_age_to_dob.py or something.</p>
+
+<p>Problem is, your colleague has been working on the very same model, and he had added some other fields too:</p>
+
+<pre><code>class Dog(models.Model):
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    dob = models.DateField()
+    fav_foods = models.CharField(max_length=255, blank=True)
+    potty_trained = models.BooleanField(default=False)
+</code></pre>
+
+<p>The migration that changes the first code snippet to the second in PostgreSQL gets saved as 0002_added_fields.py, and now your django-migrate fails after a git pull. Because 0002_added_fields.py assumes that age is still there and it&rsquo;s a models.IntegerField, but the database on your machine looks different because you already renamed age to dob. Git can resolve conflicts between your models.py, but not between the Django migrations.</p>
+
+<p>So it&rsquo;s best to just not add those migrations to the code repository unless you&rsquo;re really sure that only one guy is working on the models. Because if more than one guy is working on the models, then everybody&rsquo;s databases are different and the migrations can&rsquo;t resolve that. You might as well do django-manage makemigrations from scratch.</p>
+
+<p>Unless, of course, you already have data in there.</p>
+
+   </div>
+ </div>
+
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+      &nbsp;<li class="previous"><a href="/post/python-google-go-life/"> From Python to Google Go and Life</a></li>
+      &nbsp;<li class="next"><a href="/post/machine-learning-tutorials/"> Easily Understandable Machine Learning Tutorials</a></li>
+</ul>
+
+
+
+    </ul>
+    </div>
+    <footer>
+
+        <p class="text-muted credit">&copy; 2018. All rights reserved. </p>
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+</body>
+
+</html>
+

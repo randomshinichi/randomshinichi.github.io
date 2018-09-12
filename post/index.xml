@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on The Chiwbaka</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on The Chiwbaka</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Winternitz OTS keypairs</title>
+      <link>/post/2018-08-30-winternitz-ots-keypairs/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-08-30-winternitz-ots-keypairs/</guid>
+      <description>WOTS is a way of generating a public/private keypair, and using it for signing messages. In other words, it&amp;rsquo;s a signature scheme. Importantly, it only depends on having a good hash function, which makes it &amp;lsquo;quantum resistant&amp;rsquo; because Shor&amp;rsquo;s algorithm can make cracking elliptic curves easier on quantum computers (????). XMSS uses a tweaked version called WOTS+, which improves some cryptographical aspects which I don&amp;rsquo;t quite understand. A lot of what I learnt came from this page at Cryptography Services.</description>
+    </item>
+    
+    <item>
+      <title>Bitcoin mining - how does it work?</title>
+      <link>/post/2018-02-22-bitcoin-mining-how-does-it-work/</link>
+      <pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-02-22-bitcoin-mining-how-does-it-work/</guid>
+      <description>Economics Behind Mining To understand how mining really works, let&amp;rsquo;s first understand the economics behind it.
+The network of computers running the coin software (let&amp;rsquo;s say Bitcoin) wants history (of transactions) to be recorded in the form of blocks, and it rewards those who do so with 12.5 BTC.
+Bitcoin wants history to be recorded in a new block every 10 minutes. Additionally, since anybody could record history in a new block, it has to make sure that those who invested the most (electricity, stake, capacity etc) have a better chance of recording a new block, because those who invested the most are probably more interested in seeing Bitcoin work properly, as opposed to those who are trying to spend their Bitcoin twice.</description>
+    </item>
+    
+    <item>
+      <title>The Concept of State in Blockchains</title>
+      <link>/post/concept-state-blockchains/</link>
+      <pubDate>Fri, 29 Sep 2017 21:21:15 +0000</pubDate>
+      
+      <guid>/post/concept-state-blockchains/</guid>
+      <description>While working on the code that makes up an actual cryptocoin, I&amp;rsquo;d always come across a class or something that would refer to a &amp;lsquo;State&amp;rsquo;. And I never really knew what that was.
+Was that the state of the coin&amp;rsquo;s network, on the latest block? The state of that node perhaps - but how could the node have a valid state when it&amp;rsquo;s still busy downloading the blockchain?
+It wasn&amp;rsquo;t until I read Ethereum&amp;rsquo;s whitepaper that the concept of state was formalized: it&amp;rsquo;s the state of the coin as your node sees it, with the blockchain data it has on your computer.</description>
+    </item>
+    
+    <item>
+      <title>Generating Jules Verne novels with Torch-RNN</title>
+      <link>/post/generating-jules-verne-novels-torch-rnn/</link>
+      <pubDate>Sun, 28 May 2017 11:03:39 +0000</pubDate>
+      
+      <guid>/post/generating-jules-verne-novels-torch-rnn/</guid>
+      <description>Torch-RNN is a rewrite of Andrej Karpathy&amp;rsquo;s char-rnn. You train it on some text, and then it can generate &amp;lsquo;similar&amp;rsquo; text. I loved reading Jules Verne novels, so being able to just crank out some new novels whenever I feel like it sounds like a great idea right?
+The hardest part was setting the environment up.
+The text preprocessor was written in Python 2, and you&amp;rsquo;d think &amp;ldquo;hey it&amp;rsquo;s just wrangling some text what requirements does it need&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Apple&#39;s custom GPU, Imagination</title>
+      <link>/post/2017-04-06-apples-custom-gpu-imagination/</link>
+      <pubDate>Thu, 06 Apr 2017 17:02:31 +0000</pubDate>
+      
+      <guid>/post/2017-04-06-apples-custom-gpu-imagination/</guid>
+      <description>Apparently Imagination lost 60% of its stock value after it was revealed that Apple wouldn&amp;rsquo;t be shipping its PowerVR GPUs within two years.
+60%. Do you know what that means? It means many people were surprised. But why? If people had kept their heads to the ground they&amp;rsquo;d have noticed long ago.
+Apple was always about vertical integration. The custom CPUs were already a big sign. And back in October 2016, the incredible David Kanter already published an article about A Look Inside Apple&amp;rsquo;s custom GPU for the iPhone.</description>
+    </item>
+    
+    <item>
+      <title>Wordpress on Low Memory Servers</title>
+      <link>/post/wordpress-low-memory-servers/</link>
+      <pubDate>Wed, 05 Apr 2017 14:57:05 +0000</pubDate>
+      
+      <guid>/post/wordpress-low-memory-servers/</guid>
+      <description>This site runs on a 512MB DigitalOcean droplet. Every week or two the Linux kernel would kill MySQL for using too much RAM&amp;hellip; and restarting it got tiring.
+When I first start nginx, php-fpm and MySQL, the memory usage starts at 370MB and only goes upwards from there. htop (and journalctl) tells me that MySQL is the biggest offender, so let&amp;rsquo;s start there.
+MySQL After some googling one parameter always popped up in every guide: innodb_buffer_pool_size.</description>
+    </item>
+    
+    <item>
+      <title>From Python to Google Go and Life</title>
+      <link>/post/python-google-go-life/</link>
+      <pubDate>Mon, 03 Apr 2017 09:38:56 +0000</pubDate>
+      
+      <guid>/post/python-google-go-life/</guid>
+      <description>Now that I&amp;rsquo;m an adult, I find that doing things on the side these days is nigh unsustainable when one has to spend most of the day making a living. Besides working out almost everyday and reading articles on entrepreneurship like I used to devour articles on dating, there&amp;rsquo;s no time left but to get a good 8 hours of sleep.
+But recently I got a chance to study Golang.</description>
+    </item>
+    
+    <item>
+      <title>Don&#39;t add Django migrations to version control</title>
+      <link>/post/dont-add-django-migrations-version-control/</link>
+      <pubDate>Thu, 30 Mar 2017 14:11:58 +0000</pubDate>
+      
+      <guid>/post/dont-add-django-migrations-version-control/</guid>
+      <description>Django docs recommend a lot of things which don&amp;rsquo;t really work out in reality.
+For instance, having a single settings.py file. The only reason I can think of having it this way is so as not to overwhelm newcomers, because you need different settings for dev, production and staging. A single tests.py for an app. Seriously, guys? You need test_views.py, test_models.py, test_manager.py, at least.
+And here&amp;rsquo;s the one thing that might be useful, might not: committing your migrations to version control.</description>
+    </item>
+    
+    <item>
+      <title>Easily Understandable Machine Learning Tutorials</title>
+      <link>/post/machine-learning-tutorials/</link>
+      <pubDate>Wed, 29 Mar 2017 15:37:56 +0000</pubDate>
+      
+      <guid>/post/machine-learning-tutorials/</guid>
+      <description>Machine Learning  Dr Jason Browniee&amp;rsquo;s Machine Learning Mastery is for everybody, even total beginners, who&amp;rsquo;ve heard the hype about ML, and want to get in on the action. It&amp;rsquo;s step by step, simple and very easy to follow.
+ Once one has done quite a few chapters into Machine Learning Mastery it&amp;rsquo;s good to check out ujjwalkarn&amp;rsquo;s Github list of Machine Learning and Deep Learning Tutorials.
+  Neural Networks  If you&amp;rsquo;re totally new to neural networks, Andrej Karpathy&amp;rsquo;s Hacker&amp;rsquo;s Guide to Neural Networks is hands down the best.</description>
+    </item>
+    
+  </channel>
+</rss>

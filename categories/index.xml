@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on The Chiwbaka</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on The Chiwbaka</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 30 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Blockchains</title>
+      <link>/categories/blockchains/</link>
+      <pubDate>Thu, 30 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/blockchains/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Learning Machine Learning</title>
+      <link>/categories/learning-machine-learning/</link>
+      <pubDate>Sun, 28 May 2017 11:03:39 +0000</pubDate>
+      
+      <guid>/categories/learning-machine-learning/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

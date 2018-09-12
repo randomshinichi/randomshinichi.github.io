@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The Concept of State in Blockchains</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <link href="" rel="alternate" type="application/rss+xml" title="The Chiwbaka" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/hc.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/"><p class="navbar-brand">The Chiwbaka</p></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="about/">About </a></li>
+					
+					<li><a href="">Home </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="/"><h1 class="brand">The Chiwbaka</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="about/">About </a></li>
+					
+						<li><a href="">Home </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           
+           <li> <a href="https://www.linkedin.com/in/achiw/"><i class="fab fa-linkedin"></i> linkedin</a> </li>
+           
+           <li> <a href="http://www.github.com/randomshinichi"><i class="fab fa-github-square"></i> github</a> </li>
+           <li> <a href="mailto:andrew.work0,%20gmail"><i class="fa fa-envelope"></i> email</a> </li>
+           <li> <a href="http://do-it-big.com"><i class="fab fa-wordpress"></i> do-it-big</a> </li>
+
+
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">The Concept of State in Blockchains</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-09-29</small></p> <hr/>
+   <div class="post">
+     <p>While working on the code that makes up an actual cryptocoin, I&rsquo;d always come across a class or something that would refer to a &lsquo;State&rsquo;. And I never really knew what that was.</p>
+
+<p>Was that the state of the coin&rsquo;s network, on the latest block?
+The state of that node perhaps - but how could the node have a valid state when it&rsquo;s still busy downloading the blockchain?</p>
+
+<p>It wasn&rsquo;t until I read Ethereum&rsquo;s whitepaper that the concept of state was formalized: it&rsquo;s the state of the coin as your node sees it, with the blockchain data it has on your computer.</p>
+
+<p>Should your node not have the latest blocks, well then your node&rsquo;s state is out of date, and it needs to download more blocks and recalculate the new state from that.</p>
+
+<p>Bitcoin&rsquo;s state is very simple. It is simply which addresses have how many coins, or the Unspent Transaction Outputs (UTXOs). The blocks don&rsquo;t have any information about the state; the Bitcoin client must calculate its own state based on the private keys it has in its wallet, and from what it has downloaded of the blockchain.</p>
+
+<p>Ethereum blocks include the state in them, in that each block header holds a hash of the state tree&rsquo;s root, as well as hashes of the transaction and storage trees&rsquo; roots (you wouldn&rsquo;t want blocks to always have a full copy of the state. That would be a waste of space. So you store them in a tree structure, where the branches can point to data (leaves) in older blocks).
+What&rsquo;s in an Ethereum state?
+1. The account&rsquo;s nonce (each time you send a transaction from this account, the nonce increases by 1. This is to prevent double spending)
+2. The account&rsquo;s balance
+3. storageRoot (data and Solidity programs go in here)
+4. codeHash (what is this?)</p>
+
+<p>Remember when you had to download that huge Bitcoin blockchain and wait for it to be synced up to the latest block just to know how much Bitcoin you have? In Ethereum, because the state is always stored with the block in this manner, you can just get the latest block, traverse the state tree (which points you to other blocks in the history that are relevant to your account) and you can get your balance much faster.</p>
+
+<p>It seems many people like the idea of storing the state in blocks, since QRL also stores the state. The State in QRL consists of (for each account):
+1. The account&rsquo;s nonce (this is everywhere. I wonder if Bitcoin accounts also have this)
+2. The account&rsquo;s balance
+3. a list of public keys that this account used before, to prevent them from being used again (One Time Signatures are what protects us from quantum computers)
+4. a list of staking accounts (this is a PoS coin)</p>
+
+   </div>
+ </div>
+
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+      &nbsp;<li class="previous"><a href="/post/2018-02-22-bitcoin-mining-how-does-it-work/"> Bitcoin mining - how does it work?</a></li>
+      &nbsp;<li class="next"><a href="/post/generating-jules-verne-novels-torch-rnn/"> Generating Jules Verne novels with Torch-RNN</a></li>
+</ul>
+
+
+
+    </ul>
+    </div>
+    <footer>
+
+        <p class="text-muted credit">&copy; 2018. All rights reserved. </p>
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+</body>
+
+</html>
+
