@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Apple&#39;s custom GPU, Imagination</title>
+  <title>Don&#39;t add Django migrations to version control</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.40.1" />
@@ -75,26 +75,63 @@
 
 
   <div id="article">
-   <div class="article-title">Apple&#39;s custom GPU, Imagination</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-04-06</small></p> <hr/>
+   <div class="article-title">Don&#39;t add Django migrations to version control</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-03-30</small></p> <hr/>
    <div class="post">
-     <p>Apparently Imagination lost 60% of its stock value after it was revealed
-that Apple wouldn't be shipping its PowerVR GPUs within two years.</p>
+     <p>Django docs recommend a lot of things which don't really work out in
+reality.</p>
 
-<p>60%. Do you know what that means? It means many people were surprised.
-But why? If people had kept their heads to the ground they'd have
-noticed long ago.</p>
+<p>For instance, having a single settings.py file. The only reason I can
+think of having it this way is so as not to overwhelm newcomers, because
+you need different settings for dev, production and staging. A single
+tests.py for an app. Seriously, guys? You need test_views.py,
+test_models.py, test_manager.py, at least.</p>
 
-<p>Apple was always about vertical integration. The custom CPUs were
-already a big sign. And back in October 2016, the incredible David
-Kanter already published an article about
-<a href="http://www.realworldtech.com/apple-custom-gpu/" title="A Look Inside Apple's
-custom GPU for the iPhone">A Look Inside Apple's
-custom GPU for the iPhone</a>.</p>
+<p>And here's the one thing that might be useful, might not: committing
+your migrations to version control.</p>
 
-<p>You know what this also means?</p>
+<p>Here's the situation: you're working on the models for a Django app.</p>
 
-<p>Someone had shorted their Imagination stock.</p>
+<pre><code>    class Dog(models.Model):
+        owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+        name = models.CharField(max_length=255)
+        age = models.IntegerField()
+</code></pre>
+
+<p>Hmm, perhaps age should be date-of-birth. After all, you don't want to
+have to write some script to be updating the age value for every dog
+every year. No, perhaps it should be named dob after all.</p>
+
+<p>So you make the change in models.py and add the migrations for the
+changes as well, they get saved as 0002_renamed_age_to_dob.py or
+something.</p>
+
+<p>Problem is, your colleague has been working on the very same model, and
+he had added some other fields too:</p>
+
+<pre><code>    class Dog(models.Model):
+        owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+        name = models.CharField(max_length=255)
+        dob = models.DateField()
+        fav_foods = models.CharField(max_length=255, blank=True)
+        potty_trained = models.BooleanField(default=False)
+</code></pre>
+
+<p>The migration that changes the first code snippet to the second in
+PostgreSQL gets saved as 0002_added_fields.py, and now your
+django-migrate fails after a git pull. Because 0002_added_fields.py
+assumes that age is still there and it's a models.IntegerField, but the
+database on your machine looks different because you already renamed age
+to dob. Git can resolve conflicts between your models.py, but not
+between the Django migrations.</p>
+
+<p>So it's best to just not add those migrations to the code repository
+unless you're really sure that only one guy is working on the models.
+Because if more than one guy is working on the models, then everybody's
+databases are different and the migrations can't resolve that. You might
+as well do django-manage makemigrations from scratch.</p>
+
+<p>Unless, of course, you already have data in there.</p>
 
    </div>
  </div>
@@ -104,8 +141,8 @@ custom GPU for the iPhone</a>.</p>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="/post/2017-05-28-generating-jules-verne-novels-torch-rnn/"> Generating Jules Verne novels with Torch-RNN</a></li>
-      &nbsp;<li class="next"><a href="/post/2017-04-05-wordpress-low-memory-servers/"> Wordpress on Low Memory Servers</a></li>
+      &nbsp;<li class="previous"><a href="/post/2017-04-03-from-python-to-google-go-and-life/"> From Python to Google Go and Life</a></li>
+      &nbsp;<li class="next"><a href="/post/2017-03-29-machine-learning-tutorials/"> Machine Learning Tutorials</a></li>
 </ul>
 
 

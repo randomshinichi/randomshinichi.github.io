@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Apple&#39;s custom GPU, Imagination</title>
+  <title>Wordpress on Low Memory Servers</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.40.1" />
@@ -75,26 +75,51 @@
 
 
   <div id="article">
-   <div class="article-title">Apple&#39;s custom GPU, Imagination</div>
-   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-04-06</small></p> <hr/>
+   <div class="article-title">Wordpress on Low Memory Servers</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2017-04-05</small></p> <hr/>
    <div class="post">
-     <p>Apparently Imagination lost 60% of its stock value after it was revealed
-that Apple wouldn't be shipping its PowerVR GPUs within two years.</p>
+     <p>This site runs on a 512MB DigitalOcean droplet.  Every week or two the
+Linux kernel would kill MySQL for using too much RAM... and restarting
+it got tiring.</p>
 
-<p>60%. Do you know what that means? It means many people were surprised.
-But why? If people had kept their heads to the ground they'd have
-noticed long ago.</p>
+<p><img src="/wordpress-low-memory-after.png" alt="after the tweaks" title="after the tweaks" /></p>
 
-<p>Apple was always about vertical integration. The custom CPUs were
-already a big sign. And back in October 2016, the incredible David
-Kanter already published an article about
-<a href="http://www.realworldtech.com/apple-custom-gpu/" title="A Look Inside Apple's
-custom GPU for the iPhone">A Look Inside Apple's
-custom GPU for the iPhone</a>.</p>
+<p>When I first start nginx, php-fpm and MySQL, the memory usage starts at
+370MB and only goes upwards from there. htop (and journalctl) tells me
+that MySQL is the biggest offender, so let's start there.</p>
 
-<p>You know what this also means?</p>
+<h2 id="mysql">MySQL</h2>
 
-<p>Someone had shorted their Imagination stock.</p>
+<p>After some googling one parameter always popped up in every guide:
+innodb_buffer_pool_size.
+<a href="https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size" title="MySQL
+docs">MySQL
+docs</a> state that it's 128MB by default. So I reduced it to 8MB to see
+what would happen. After all, I doubt the entirety of my posts on this
+site+Wordpress settings could ever reach 8MB, and even if it did, it's
+backed by an SSD, so who cares.</p>
+
+<p>It made a huge difference. MySQL went from using 18% of my RAM (~92MB)
+to just 8% (43MB).</p>
+
+<h2 id="php">PHP</h2>
+
+<p>Some Googling led to
+<a href="https://ma.ttias.be/a-better-way-to-run-php-fpm/" title="A better way to run
+PHP">A better way to run
+PHP</a>, which advocates using pm = ondemand instead of pm = dynamic.</p>
+
+<p>Before, php-fpm had 3 child processes taking up 18% of my RAM. Now, it
+has none, and it just spins them up on demand which makes a lot of
+sense.</p>
+
+<p>I don't use php-fpm pools so I ignored that part.</p>
+
+<h2 id="390mb-memory-on-fresh-start-140mb">390MB memory on fresh start -> 140MB!!</h2>
+
+<p>The system now uses ~140MB of RAM and I'm pretty proud of myself - after
+just two tweaks! Nobody cares about this site right now but if traffic
+picks up I'll just enable nginx microcaching.</p>
 
    </div>
  </div>
@@ -104,8 +129,8 @@ custom GPU for the iPhone</a>.</p>
  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
  <ul class="pager">
-      &nbsp;<li class="previous"><a href="/post/2017-05-28-generating-jules-verne-novels-torch-rnn/"> Generating Jules Verne novels with Torch-RNN</a></li>
-      &nbsp;<li class="next"><a href="/post/2017-04-05-wordpress-low-memory-servers/"> Wordpress on Low Memory Servers</a></li>
+      &nbsp;<li class="previous"><a href="/post/2017-04-06-apples-custom-gpu-imagination/"> Apple&#39;s custom GPU, Imagination</a></li>
+      &nbsp;<li class="next"><a href="/post/2017-04-03-from-python-to-google-go-and-life/"> From Python to Google Go and Life</a></li>
 </ul>
 
 

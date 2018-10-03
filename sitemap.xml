@@ -13,55 +13,42 @@
   </url>
   
   <url>
-    <loc>/post/concept-state-blockchains/</loc>
-    <lastmod>2017-09-29T21:21:15+00:00</lastmod>
+    <loc>/post/2017-09-29-concept-state-blockchains/</loc>
+    <lastmod>2017-09-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/generating-jules-verne-novels-torch-rnn/</loc>
-    <lastmod>2017-05-28T11:03:39+00:00</lastmod>
+    <loc>/post/2017-05-28-generating-jules-verne-novels-torch-rnn/</loc>
+    <lastmod>2017-05-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/2017-04-06-apples-custom-gpu-imagination/</loc>
-    <lastmod>2017-04-06T17:02:31+00:00</lastmod>
+    <lastmod>2017-04-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/wordpress-low-memory-servers/</loc>
-    <lastmod>2017-04-05T14:57:05+00:00</lastmod>
+    <loc>/post/2017-04-05-wordpress-low-memory-servers/</loc>
+    <lastmod>2017-04-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/python-google-go-life/</loc>
-    <lastmod>2017-04-03T09:38:56+00:00</lastmod>
+    <loc>/post/2017-04-03-from-python-to-google-go-and-life/</loc>
+    <lastmod>2017-04-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/dont-add-django-migrations-version-control/</loc>
-    <lastmod>2017-03-30T14:11:58+00:00</lastmod>
+    <loc>/post/2017-03-30-dont-add-django-migrations-version-control/</loc>
+    <lastmod>2017-03-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/machine-learning-tutorials/</loc>
-    <lastmod>2017-03-29T15:37:56+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/blockchains/</loc>
-    <lastmod>2018-08-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/post/2017-03-29-machine-learning-tutorials/</loc>
+    <lastmod>2017-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2018-08-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/learning-machine-learning/</loc>
-    <lastmod>2017-05-28T11:03:39+00:00</lastmod>
     <priority>0</priority>
   </url>
   
