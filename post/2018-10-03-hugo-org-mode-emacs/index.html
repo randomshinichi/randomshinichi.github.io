@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>hugo, org-mode, emacs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.40.1" />
+  <link href="" rel="alternate" type="application/rss+xml" title="The Chiwbaka" />
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/hc.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  
+    
+    </head>
+    <body>
+<div class="nav-toggle"><i class="fa fa-bars fa-2x"></i> Herring Cove </div>
+      <div id = "wrapper">
+
+
+<div class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="/"><p class="navbar-brand">The Chiwbaka</p></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+					
+					
+					<li><a href="about/">About </a></li>
+					
+					<li><a href="">Home </a></li>
+					
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+       
+       <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+					<img src="" />
+          <li class="sidebar-brand"><a href="/"><h1 class="brand">The Chiwbaka</h1></a><h3></h3></li>
+          <hr />
+					
+						<li><a href="about/">About </a></li>
+					
+						<li><a href="">Home </a></li>
+					
+          <hr />
+          <div id="social-wrapper">
+           
+           <li> <a href="https://www.linkedin.com/in/achiw/"><i class="fab fa-linkedin"></i> linkedin</a> </li>
+           
+           <li> <a href="http://www.github.com/randomshinichi"><i class="fab fa-github-square"></i> github</a> </li>
+           <li> <a href="mailto:andrew.work0,%20gmail"><i class="fa fa-envelope"></i> email</a> </li>
+           <li> <a href="http://do-it-big.com"><i class="fab fa-wordpress"></i> do-it-big</a> </li>
+
+
+         </div>
+       </ul>
+     </div>
+
+
+
+     <div class="container">
+
+
+  <div id="article">
+   <div class="article-title">hugo, org-mode, emacs</div>
+   <p class="meta"><small>&nbsp;<i class="fa fa-calendar-o"></i> 2018-10-03</small></p> <hr/>
+   <div class="post">
+     <p>This blog used to be on Wordpress. Then I wanted to make it leaner so I could run more on my VPS, so I moved it to Jekyll. Then I got tired of setting Jekyll and its dependencies up, plus I wanted org-mode support, so I moved it to Hugo.</p>
+
+<p>I don't know if it's the amazing flexibility of emacs that I like, or just how amazingly useful org-mode is. org-mode has been my knowledge management system for a few months now and the ability to quickly setup whatever system I need to support my thought processes is simply liberating.</p>
+
+<p>For example, I press F6 from emacs:
+<img src="/emacs.png" alt="/emacs.png" title="/emacs.png" /></p>
+
+<p>and emacs asks me if I want to record some thoughts on dancing, or log what I ate (to troubleshoot pimples), or write a new blog post.</p>
+
+<p>If I press 'd', it will open a text file called dance.org, insert the current date, and let me type in the title and the entry.</p>
+
+<pre><code class="language-org">* Forro/Samba/Zouk party by Dhiego and Axe Funk girl
+[2018-09-02 So]
+I finally understood that dancing is not something you have to think very consciously about...
+</code></pre>
+
+<p>If I press 'f', it will open a text file called food.org, record the time and date, and then I can type in what I ate.</p>
+
+<pre><code class="language-org">* 2018
+** 2018-08 August
+*** 2018-08-27 Montag
+*** 2018-08-28 Dienstag
+*** 2018-08-29 Mittwoch
+[2018-08-29 Mi 10:00] Less new pimples than yesterday.
+Cereal + Almond milk
+Potatoes + champignon creme
+Sausages with cheese inside
+1 Paprika, 1 apple, blueberries + frozen fruit
+</code></pre>
+
+<p>If I press 'b', it will prompt me for the slug, and create a file in my hugo blog's content/post directory, with the following:</p>
+
+<pre><code>#+title: (cursor goes here)
+#+date: 2018-10-03
+</code></pre>
+
+<p>As you can see, I like to keep separate threads of thoughts in different files, but timestamped and with some structure. This system is really flexible and doesn't force me into a specific way of working - it lets me code up my own system that fits my brain (Elisp is easy to figure out) and stores everything in text files.</p>
+
+<p>Evernote is the only other note-taking application I know of that is as powerful as org-mode, and it's one of those applications that tries to get you 'into the cloud', so they can charge you a subscription fee.</p>
+
+<p>But even Evernote has its own way of working, so you have to work within the way they envisioned. This isn't necessarily a bad thing. It's just that the freedom that org-mode allows me is entirely unexpected, because there's nothing else like it out there.</p>
+
+   </div>
+ </div>
+
+
+ <a href="https://twitter.com/share" class="twitter-share-button " data-size="small" data-count="none">Tweet</a>
+ <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+ <ul class="pager">
+     
+      &nbsp;<li class="next"><a href="/post/2018-08-30-winternitz-ots-keypairs/"> Winternitz OTS keypairs</a></li>
+</ul>
+
+
+
+    </ul>
+    </div>
+    <footer>
+
+        <p class="text-muted credit">&copy; 2018. All rights reserved. </p>
+    </footer>
+ 
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/hc.js"></script>
+</body>
+
+</html>
+

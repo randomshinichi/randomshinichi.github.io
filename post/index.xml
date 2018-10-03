@@ -6,10 +6,20 @@
     <description>Recent content in Posts on The Chiwbaka</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 30 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>hugo, org-mode, emacs</title>
+      <link>/post/2018-10-03-hugo-org-mode-emacs/</link>
+      <pubDate>Wed, 03 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018-10-03-hugo-org-mode-emacs/</guid>
+      <description>This blog used to be on Wordpress. Then I wanted to make it leaner so I could run more on my VPS, so I moved it to Jekyll. Then I got tired of setting Jekyll and its dependencies up, plus I wanted org-mode support, so I moved it to Hugo.
+I don&#39;t know if it&#39;s the amazing flexibility of emacs that I like, or just how amazingly useful org-mode is. org-mode has been my knowledge management system for a few months now and the ability to quickly setup whatever system I need to support my thought processes is simply liberating.</description>
+    </item>
     
     <item>
       <title>Winternitz OTS keypairs</title>
