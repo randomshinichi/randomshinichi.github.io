@@ -21,6 +21,10 @@ pagerSize = 10
 
 [params]
 description = 'Porting Go to 32-bit PowerPC with a fleet of AI agents. Field notes on compiler ports, old Macs and agent fleets.'
+
+# Home masthead line. Empty = nothing rendered under the site title.
+tagline = ''
+
 author = 'Andrew Chiw'
 keywords = ['PowerPC', 'Go', 'compiler port', 'AI agents', 'darwin/ppc', 'trading']
 

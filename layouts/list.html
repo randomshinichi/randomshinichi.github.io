@@ -2,7 +2,7 @@
 
 <header class="page-header">
   {{- if .IsHome }}
-  <h1 class="site-tagline">PowerPC ports, Go internals, agent fleets and trade journals — one graph</h1>
+  {{- with site.Params.tagline }}<h1 class="site-tagline">{{ . }}</h1>{{ end }}
   {{- else }}
   <h1>
     {{ .Title }}
