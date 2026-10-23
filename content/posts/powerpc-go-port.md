@@ -1,5 +1,5 @@
 ---
-title: "Porting Go to PowerPC, and the Agent Fleet That Ate My iBook"
+title: "I'm hiring and firing these agents like my boss fired me"
 date: 2026-10-23T02:20:00+09:00
 draft: false
 description: "What happened when I asked AI agents to port Golang to 32-bit PowerPC Macs, knowing nothing about what sits beneath the compiler."

@@ -1,6 +1,12 @@
 {{- define "main" }}
 
 <header class="page-header">
+  {{- if .IsHome }}
+  <h1 class="site-tagline">Old machines, new toolchains</h1>
+  <div class="post-description">
+    Go for 32-bit PowerPC, built by an AI agent fleet I can't fully trust.
+  </div>
+  {{- else }}
   <h1>
     {{ .Title }}
     {{- if and (or (eq .Kind `term`) (eq .Kind `section`)) (.Param "ShowRssButtonInSectionTermList") }}
@@ -20,6 +26,7 @@
   <div class="post-description">
     {{ .Description | markdownify }}
   </div>
+  {{- end }}
   {{- end }}
 </header>
 
