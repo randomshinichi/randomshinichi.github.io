@@ -1,0 +1,12 @@
+# Hugo build output
+/public/
+/resources/_gen/
+
+# Theme installed via install-theme.sh (tracked as a git submodule when desired)
+/themes/
+
+# Local cruft
+.hugo_build.lock
+hugo_stats.json
+*.log
+.DS_Store

@@ -1,0 +1,93 @@
+baseURL = 'https://andrewchiw.dev/'
+locale = 'en-us'
+title = 'Andrew Chiw'
+theme = 'PaperMod'
+
+timeZone = 'Asia/Tokyo'
+enableRobotsTXT = true
+enableGitInfo = false
+
+hasCJKLanguage = false
+
+[pagination]
+pagerSize = 8
+
+[params]
+description = 'Notes on ports, PowerPC Macs, AI agent fleets and trading.'
+author = 'Andrew Chiw'
+keywords = ['PowerPC', 'Go', 'compiler port', 'AI agents', 'trading']
+
+ShowReadingTime = true
+ShowShareButtons = false
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+ShowWordCount = true
+ShowRssButtonInSectionTermList = true
+UseHugoToc = true
+disableSpecial1stPost = false
+comments = false
+
+[params.profileMode]
+enabled = true
+title = 'Andrew Chiw'
+description = 'Porting Go to PowerPC with a fleet of AI agents, and other experiments.'
+imageUrl = ''
+imageWidth = 0
+imageHeight = 0
+homeInfoMode = 'compact'
+
+[[params.profileMode.buttons]]
+name = 'Posts'
+url = '/posts/'
+
+[[params.profileMode.buttons]]
+name = 'About'
+url = '/about/'
+
+[params.homeInfoParams]
+Title = 'Welcome'
+Content = 'I port old-architecture software to modern workflows. Currently: Go for 32-bit PowerPC Macs, driven by an AI agent fleet I cannot fully trust.'
+
+[[menu.main]]
+identifier = 'posts'
+name = 'Posts'
+url = '/posts/'
+weight = 10
+
+[[menu.main]]
+identifier = 'about'
+name = 'About'
+url = '/about/'
+weight = 20
+
+[[menu.main]]
+identifier = 'search'
+name = 'Search'
+url = '/search/'
+weight = 30
+
+[params.appearance]
+disableThemeToggle = false
+defaultTheme = 'auto'
+
+[markup]
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+lineNos = false
+style = 'monokai'
+noClasses = false
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[taxonomies]
+tag = 'tags'
+category = 'categories'
+
+[outputs]
+home = ['HTML', 'RSS']
+
+[security.funcs]
+getenv = ['^HUGO_', '^CI$']
