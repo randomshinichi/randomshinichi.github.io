@@ -62,18 +62,14 @@
     margin: 22px 0;
 }
 
-/* Home masthead: tagline, not a repeated site name. */
+/* Home masthead: descriptive line, not a repeated site name. */
 .site-tagline {
-    font-size: 34px;
-    line-height: 1.25;
-    margin: 0 0 6px;
-    letter-spacing: -0.4px;
-}
-
-.page-header .post-description {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.45;
+    margin: 0;
+    max-width: 44ch;
     color: var(--secondary);
-    font-size: 16px;
-    max-width: 46ch;
 }
 
 @media (max-width: 520px) {
