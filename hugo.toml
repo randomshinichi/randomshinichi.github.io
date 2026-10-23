@@ -10,49 +10,36 @@ enableGitInfo = false
 hasCJKLanguage = false
 
 [pagination]
-pagerSize = 8
+pagerSize = 10
 
 [params]
 description = 'Notes on ports, PowerPC Macs, AI agent fleets and trading.'
 author = 'Andrew Chiw'
 keywords = ['PowerPC', 'Go', 'compiler port', 'AI agents', 'trading']
 
+# Home is a plain list of posts: no profile card, no intro blurb.
+profileMode.enabled = false
+mainSections = ['posts']
+
 ShowReadingTime = true
 ShowShareButtons = false
 ShowPostNavLinks = true
-ShowBreadCrumbs = true
+ShowBreadCrumbs = false
 ShowCodeCopyButtons = true
 ShowWordCount = true
 ShowRssButtonInSectionTermList = true
 UseHugoToc = true
-disableSpecial1stPost = false
+disableSpecial1stPost = true
+hideSummary = true
 comments = false
 
-[params.profileMode]
-enabled = true
-title = 'Andrew Chiw'
-description = 'Porting Go to PowerPC with a fleet of AI agents, and other experiments.'
-imageUrl = ''
-imageWidth = 0
-imageHeight = 0
-homeInfoMode = 'compact'
-
-[[params.profileMode.buttons]]
-name = 'Posts'
-url = '/posts/'
-
-[[params.profileMode.buttons]]
-name = 'About'
-url = '/about/'
-
-[params.homeInfoParams]
-Title = 'Welcome'
-Content = 'I port old-architecture software to modern workflows. Currently: Go for 32-bit PowerPC Macs, driven by an AI agent fleet I cannot fully trust.'
+[params.label]
+text = 'Andrew Chiw'
 
 [[menu.main]]
 identifier = 'posts'
 name = 'Posts'
-url = '/posts/'
+url = '/'
 weight = 10
 
 [[menu.main]]
