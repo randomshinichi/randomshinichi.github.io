@@ -83,7 +83,9 @@ tag = 'tags'
 category = 'categories'
 
 [outputs]
-home = ['HTML', 'RSS']
+# `robots` must be listed explicitly: an explicit `home` list replaces Hugo's
+# defaults (which would otherwise emit /robots.txt because enableRobotsTXT).
+home = ['HTML', 'RSS', 'robots']
 
 [security.funcs]
 getenv = ['^HUGO_', '^CI$']
