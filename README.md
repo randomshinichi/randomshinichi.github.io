@@ -30,15 +30,23 @@ Draft source lives outside this repo; published copies are committed here.
 
 ## Deploy
 
-Any static host works on `public/`. GitHub Pages example:
+Push to `main` — GitHub Actions (`.github/workflows/pages.yml`) builds the site
+with Hugo and deploys the compiled output to GitHub Pages. Nothing generated is
+committed; `public/` stays gitignored.
 
-```bash
-hugo --gc --minify && rsync -a --delete public/ <deploy-target>/
-```
+Live site: <https://andrewchiw.dev> (custom domain, `static/CNAME`).
+Repo: `randomshinichi/randomshinichi.github.io`, Pages source = "GitHub Actions".
 
-Set `baseURL` in `hugo.toml` to the real origin before deploying (currently
-`https://andrewchiw.dev/`). For a `*.github.io` project site, use
-`baseURL = 'https://<user>.github.io/<repo>/'`.
+| Branch | Contents |
+|---|---|
+| `main` | Hugo source (this tree) |
+| `old-blog` | frozen pre-Hugo static blog (the old `master`) |
+
+Manual rebuild: `gh workflow run pages.yml`. Watch it:
+`gh run watch $(gh run list --workflow=pages.yml --limit=1 --json databaseId --jq '.[0].databaseId')`.
+
+Local production build is still just `hugo --gc --minify`, and any static host
+works on `public/`.
 
 ## Layout
 
@@ -49,3 +57,4 @@ Set `baseURL` in `hugo.toml` to the real origin before deploying (currently
 | `content/about.md` | About page |
 | `content/search.md` | PaperMod Fuse search page |
 | `scripts/` | theme install + post scaffold |
+| `static/CNAME` | custom domain written into the deployed artifact |

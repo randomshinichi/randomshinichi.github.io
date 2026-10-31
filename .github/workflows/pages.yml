@@ -1,0 +1,88 @@
+# Build the Hugo site and deploy the compiled output to GitHub Pages.
+#
+# Pages is configured as "GitHub Actions" (build_type: workflow), so the
+# generated HTML never lives in a branch: the artifact is uploaded straight
+# from the runner. Source of truth for the site content stays on `main`;
+# the pre-Hugo static blog is preserved on the `old-blog` branch.
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  # Keep in sync with the version used locally (`hugo version`).
+  HUGO_VERSION: 0.165.0
+  # PaperMod is gitignored, so CI installs it. Pinned to the commit the site
+  # was last built with locally; bump deliberately after testing a theme update.
+  THEME_REPO: https://github.com/adityatelange/hugo-PaperMod
+  THEME_COMMIT: 969bebdc5600a1639158b5ef4eff9cf6cbb511ac
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Install Hugo (extended)
+        run: |
+          wget -q -O "$RUNNER_TEMP/hugo.deb" \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
+          hugo version
+
+      - name: Install PaperMod theme
+        run: |
+          mkdir -p themes
+          git init -q themes/PaperMod
+          git -C themes/PaperMod remote add origin "$THEME_REPO"
+          if git -C themes/PaperMod fetch -q --depth 1 origin "$THEME_COMMIT"; then
+            git -C themes/PaperMod checkout -q FETCH_HEAD
+          else
+            echo "pinned commit unavailable, falling back to default branch"
+            git clone -q --depth 1 "$THEME_REPO" themes/PaperMod
+          fi
+          git -C themes/PaperMod log -1 --oneline
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      # baseURL comes from hugo.toml (https://andrewchiw.dev/); the Pages
+      # custom domain is set on the repo, so no override is needed here.
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+        run: hugo --gc --minify
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
